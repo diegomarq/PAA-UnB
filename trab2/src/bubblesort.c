@@ -2,7 +2,7 @@
 #include <string.h>
 
 #define SIZE_S 100
-#define SIZE_C 2
+#define SIZE_C 3300000
 
 char data[SIZE_C][SIZE_S];
 int size = 0;

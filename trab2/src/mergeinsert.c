@@ -80,7 +80,5 @@ int main(int argc, char *argv[]) {
         printf("%s", data[i]);
         printf("\n");
     }
-    return 0;
-
-  
+    return 0;  
 }

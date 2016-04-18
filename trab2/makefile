@@ -1,7 +1,9 @@
-all: maker clean
+SRC = "./src/"
 
-# main: sorts.o
-# 	gcc -Wall main.c sorts.o -o teste.out
+all: merge maker clean
+
+merge:
+	gcc -Wall $(SRC)mergesort.c -o $(SRC)merge.out
 
 # sorts.o:
 # 	gcc -Wall sorts.h sorts.c -c
