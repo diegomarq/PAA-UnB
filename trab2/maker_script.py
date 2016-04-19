@@ -11,7 +11,7 @@ for type in files:
 		if not os.path.isdir(outpath):
 			print "Caminho: " + outpath + "\nNao existe e sera criado"
 			os.makedirs(outpath)
-		cmd = "./maker.out " + str(num) + " " + type[1]  + " > " + outpath  + str(num) + "_" + type[0].lower() + ".txt"
+		cmd = "./bin/maker.out " + str(num) + " " + type[1]  + " > " + outpath  + str(num) + "_" + type[0].lower() + ".txt"
 		print "Running : " + cmd
 		process = subprocess.Popen(cmd,shell=True, stdout=subprocess.PIPE)
 		process.wait()
