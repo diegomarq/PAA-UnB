@@ -11,19 +11,23 @@ def read_datafile(file_name):
 
 #Plotting to our canvas
 
-for i in range(1,3):
-    entrada = "entrada" + str(i) + ".csv"
-    data = read_datafile(entrada)
-    print "Amaral mto foda"
 
-    tmp = linecache.getline(entrada, 1)
+files = ["reversed","shuffle","normal"]
+dirs = ["Bubble", "Comb", "Insertion"]
+for sorts in dirs:
+    for tipo in files:
+        entrada = "./Saidas/" + sorts + "/" + "saida_" + tipo + ".csv"
+        data = read_datafile(entrada)
+        print "Amaral mto foda"
 
-    plt.plot(data['x'], data['y'])
-    plt.title(tmp)
-    plt.ylabel('Tempo (s)')
-    plt.xlabel('Tamanho da entrada')
+        tmp = linecache.getline(entrada, 1)
 
-    saida = "grafico" + str(i) + ".png"
-    plt.savefig(saida)
+        plt.plot(data['x'], data['y'])
+        plt.title(tmp)
+        plt.ylabel('Tempo (s)')
+        plt.xlabel('Tamanho da entrada')
 
-    plt.close()
+        saida = "grafico" + str(i) + ".png"
+        plt.savefig(saida)
+
+        plt.close()

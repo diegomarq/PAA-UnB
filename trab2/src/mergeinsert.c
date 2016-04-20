@@ -54,17 +54,16 @@ void merge(int begin, int middle, int end) {
 void mergesort(int begin, int end, int k) {
     int middle;
   
-    if(begin != end) {
-        middle = (begin+end)/2;
-        mergesort(begin, middle, k);
-        mergesort(middle+1, end, k);
-
-        if(end-begin+1 <= k)
-            insertionsort(begin, end);
-        else
+    if(end+begin <= k) {
+        insertionsort(begin, end);
+    } else {
+        if(begin != end) {
+            middle = (begin+end)/2;
+            mergesort(begin, middle, k);
+            mergesort(middle+1, end, k);
             merge(begin, middle, end);
-
-    }
+        }
+    }    
 }
 
 int main(int argc, char *argv[]) {  

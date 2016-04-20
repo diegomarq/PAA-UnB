@@ -20,7 +20,7 @@ def escreva(outfile_name,sum=None,num=None,mode=None,tipo=None):
 			f.write("\n")
 
 if (len(sys.argv) > 2):
-	sort = ["Bubble","Comb","Insertion"]
+	sort = ["conta_Inversao"]
 	files = ["Reversed","Shuffle","Normal"]
 	archives = 20
 	timeout = int(sys.argv[1]);
@@ -53,6 +53,7 @@ if (len(sys.argv) > 2):
 					process = subprocess.Popen(cmd,shell=True, stdout=subprocess.PIPE)
 					process.wait()
 					tempo = float(process.stdout.read())
+					print tempo
 					if(tempo >= timeout):
 						estoura = True
 						print "Nao precisa fazer " + str(num) + " pois sera maior que o timeout"
