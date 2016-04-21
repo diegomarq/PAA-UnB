@@ -7,7 +7,7 @@ for type in files:
 	num = 10
 	archives = 20
 	for i in range(0,archives):
-		outpath = "./Entradas/" + type[0] + "/";
+		outpath = ".io/entradas/" + type[0] + "/";
 		if not os.path.isdir(outpath):
 			print "Caminho: " + outpath + "\nNao existe e sera criado"
 			os.makedirs(outpath)

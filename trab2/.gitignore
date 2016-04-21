@@ -1,3 +1,2 @@
-*.out
-Entradas/
-Saidas/
+io/entradas/
+io/saidas/

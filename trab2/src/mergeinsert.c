@@ -86,9 +86,9 @@ int main(int argc, char *argv[]) {
     double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + end.tv_usec - start.tv_usec) / 1.e6;
     printf("%lf\n",delta);
 
-    for(i = 0; i < size; i++) {
-        printf("%s", data[i].s);
-        printf("\n");
-    }
+    // for(i = 0; i < size; i++) {
+    //     printf("%s", data[i].s);
+    //     printf("\n");
+    // }
     return 0;  
 }

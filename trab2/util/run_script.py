@@ -20,7 +20,11 @@ def escreva(outfile_name,sum=None,num=None,mode=None,tipo=None):
 			f.write("\n")
 
 if (len(sys.argv) > 2):
+<<<<<<< HEAD:trab2/util/run_script.py
+	sort = ["Bubble"] #inserir nome dos sorts
+=======
 	sort = ["conta_Inversao"]
+>>>>>>> 3c17ac8c3188a7aec3cf8943ff34336be27b5a5f:trab2/script.py
 	files = ["Reversed","Shuffle","Normal"]
 	archives = 20
 	timeout = int(sys.argv[1]);
@@ -28,12 +32,12 @@ if (len(sys.argv) > 2):
 	sum = float(0)
 	for mode in sort:
 		print "Rodando para o algoritmo " + mode
-		outpath = "./Saidas/" + mode + "/"
+		outpath = "./io/saidas/" + mode + "/"
 		if not os.path.isdir(outpath):
 			print "Caminho: " + outpath + "\nNao existe e sera criado"
 			os.makedirs(outpath)
 		for type in files:
-			inpath = "./Entradas/" + type + "/"
+			inpath = "./io/entradas/" + type + "/"
 			outfile_name = outpath + "saida_" + type.lower() + ".csv";
 			estoura = False
 			escreva(outfile_name,None,None,mode,type)
@@ -46,14 +50,21 @@ if (len(sys.argv) > 2):
 					continue
 				sum = float(0)
 				infile_name = inpath + str(num) + "_" + type.lower() + ".txt"
-				cmd = " ./bin/" + mode.lower() + ".out <" + infile_name
+				cmd = "timeout " + str(timeout) + " ./bin/" + mode.lower() + ".out < " + infile_name
 				print "Running: " + cmd
 				for j in range(0,times):
 					print "times " + str(j);		
 					process = subprocess.Popen(cmd,shell=True, stdout=subprocess.PIPE)
 					process.wait()
+<<<<<<< HEAD:trab2/util/run_script.py
+					try:
+						tempo = float(process.stdout.read())
+					except ValueError as e:
+						tempo = timeout
+=======
 					tempo = float(process.stdout.read())
 					print tempo
+>>>>>>> 3c17ac8c3188a7aec3cf8943ff34336be27b5a5f:trab2/script.py
 					if(tempo >= timeout):
 						estoura = True
 						print "Nao precisa fazer " + str(num) + " pois sera maior que o timeout"
