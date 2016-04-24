@@ -20,11 +20,7 @@ def escreva(outfile_name,sum=None,num=None,mode=None,tipo=None):
 			f.write("\n")
 
 if (len(sys.argv) > 2):
-<<<<<<< HEAD:trab2/util/run_script.py
 	sort = ["Bubble"] #inserir nome dos sorts
-=======
-	sort = ["conta_Inversao"]
->>>>>>> 3c17ac8c3188a7aec3cf8943ff34336be27b5a5f:trab2/script.py
 	files = ["Reversed","Shuffle","Normal"]
 	archives = 20
 	timeout = int(sys.argv[1]);

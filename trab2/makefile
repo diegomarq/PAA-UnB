@@ -1,7 +1,8 @@
 SRC = "./src/"
 EXE = "./bin/"
+UTIL = "./util/"
 
-all: bubblesort combsort insertion merge selection shell maker conta_inversao mergeinsert clean
+all: bubblesort combsort insertion merge selection shell conta_inversao mergeinsert maker_s clean
 
 insertion:
 	gcc -Wall $(SRC)insertionsort.c -o $(EXE)insertion.out
@@ -27,11 +28,8 @@ conta_inversao:
 mergeinsert:
 	gcc -Wall $(SRC)mergeinsert.c -o $(EXE)mergeinsert.out
 
-# sorts.o:
-# 	gcc -Wall sorts.h sorts.c -c
-
-maker:
-	gcc -Wall string_maker.c -o $(EXE)maker.out
+maker_s:
+	gcc -Wall $(UTIL)maker_s.c -o $(EXE)maker.out
 	
 clean:
 	rm -rf *.o

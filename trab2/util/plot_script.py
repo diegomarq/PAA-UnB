@@ -16,8 +16,8 @@ files = ["Normal","Reversed","Shuffle"]
 dirs = ["Bubble","Comb","Insertion","Merge","Merge_insert4","Merge_insert8","Merge_insert32","Merge_insert64","Selection","Shell"]
 for sorts in dirs:
     for tipo in files:
-        entrada = "./io/saidas/" + tipo + "/" + sorts + "/" + "saida_" + tipo.lower() + ".csv"
-        outpath = "./io/graficos/" + sorts + "/";
+        entrada = "./saidas/" + sorts + "/" + "saida_" + tipo.lower() + ".csv"
+        outpath = "./graficos/" + sorts + "/";
         if not os.path.isdir(outpath):
         	print "Caminho: " + outpath + "\nNao existe e sera criado"
         	os.makedirs(outpath)
