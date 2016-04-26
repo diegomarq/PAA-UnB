@@ -9,8 +9,10 @@ def escreva(outfile_name,sum=None,num=None,mode=None,tipo=None):
 		if not num == None:
 			print "Escrevendo: " + outfile_name
 			if not sum == None:
-				duracao = "{0:.7f}".format(sum)
-				print "Time:" + duracao
+				# duracao = "{0:.7f}".format(sum)
+				duracao = sum
+				# print "Time:" + duracao
+				print "Vezes:" + duracao
 			else:
 				duracao = "estimar"
 			f.write(str(num) + "," + duracao)
@@ -20,12 +22,13 @@ def escreva(outfile_name,sum=None,num=None,mode=None,tipo=None):
 			f.write("\n")
 
 if (len(sys.argv) > 2):
-	sort = ["Bubble"] #inserir nome dos sorts
+	sort = ["Conta_Inversao"] #inserir nome dos sorts
 	files = ["Reversed","Shuffle","Normal"]
 	archives = 20
 	timeout = int(sys.argv[1]);
 	times = int(sys.argv[2])
-	sum = float(0)
+	# sum = float(0)
+	# sum = "0";
 	for mode in sort:
 		print "Rodando para o algoritmo " + mode
 		outpath = "./io/saidas/" + mode + "/"
@@ -44,32 +47,35 @@ if (len(sys.argv) > 2):
 					escreva(outfile_name,None,num,None,None)
 					num*=2
 					continue
-				sum = float(0)
+				# sum = float(0)
+				# sum = "0";
 				infile_name = inpath + str(num) + "_" + type.lower() + ".txt"
 				cmd = "timeout " + str(timeout) + " ./bin/" + mode.lower() + ".out < " + infile_name
+				print cmd
 				print "Running: " + cmd
 				for j in range(0,times):
 					print "times " + str(j);		
 					process = subprocess.Popen(cmd,shell=True, stdout=subprocess.PIPE)
 					process.wait()
-<<<<<<< HEAD:trab2/util/run_script.py
 					try:
-						tempo = float(process.stdout.read())
+						# tempo = float(process.stdout.read())
+						tempo = process.stdout.readline()
 					except ValueError as e:
 						tempo = timeout
-=======
-					tempo = float(process.stdout.read())
-					print tempo
->>>>>>> 3c17ac8c3188a7aec3cf8943ff34336be27b5a5f:trab2/script.py
-					if(tempo >= timeout):
-						estoura = True
-						print "Nao precisa fazer " + str(num) + " pois sera maior que o timeout"
-						escreva(outfile_name,None,num,None,None)
-						break
-					sum += tempo
+					# tempo = float(process.stdout.read())
+					tempo = process.stdout.readline()
+					print "Tempo:" +tempo.strip()
+					# if(tempo >= timeout):
+					# 	estoura = True
+					# 	print "Nao precisa fazer " + str(num) + " pois sera maior que o timeout"
+					# 	escreva(outfile_name,None,num,None,None)
+					# 	break
+					# sum += tempo
+					# sum = tempo
 					time.sleep(1)
 				if(not estoura):
-					sum/=times
+					# sum/=times
+					sum = tempo
 					escreva(outfile_name,sum,num,None,None)
 				num*=2
 				if(i == 3):
