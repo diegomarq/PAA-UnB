@@ -1,0 +1,47 @@
+Fato:		T(n) = aT(n/b) + n^fn
+Suposicao:	T(n/b) => c(n/b)^p
+precisa:	T(n) => cn^p
+
+T(n)	= aT(n/b) + n^fn
+		=> ac(n/b)^p + n^fn
+		--------------------
+
+		itm_calc = 	a/pow(b, p) // calculo intermediario para simplificar
+		itm_view = pow(itm_calc, -1) // pow(.., -1) para ser denominador
+
+		--------------------
+		= (c/itm_view)n^p + n^fn
+		--------------------
+
+se itm_calc <= 1 entao:
+		--------------------		
+		solucao nao exite
+		cn^p para nenhuma escolha de c > 0
+		--------------------
+se nao:
+
+		rd_calc = 1 - itm_calc // calculo do denominador residual
+		rd_view = pow(rd_calc, -1)
+
+		--------------------
+		= cn^p - ((c/rd_view)n^p - n^fn) <- desejado - residual
+		>= cn^p <- desejado
+
+		Quando (c/rd_view)n^p - n^fn <= 0, por exemplo
+		--------------------
+
+se p < fn entao:
+
+		c <= rd_view e n <= 1
+
+se p == fn entao:
+		
+		c = 1
+		Enquanto res < 1 faca:
+			res = c/rd_view
+			c++
+		fim-enquanto
+		n <= 1
+
+se nao:
+		solucao nao existe!
