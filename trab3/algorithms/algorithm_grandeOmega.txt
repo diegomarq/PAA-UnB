@@ -6,28 +6,29 @@ T(n)	= aT(n/b) + n^fn
 		=> ac(n/b)^p + n^fn
 		--------------------
 
-		itm_calc = 	a/pow(b, p) // calculo intermediario para simplificar
-		itm_view = pow(itm_calc, -1) // pow(.., -1) para ser denominador
+		itm_calc = 	a/pow(b, p) // calculo intermediario para simplificar	
 
 		--------------------
-		= (c/itm_view)n^p + n^fn
+		= itm_calc cn^p + n^fn
 		--------------------
 
-se itm_calc <= 1 entao:
-		--------------------		
+se itm_calc < 1 e p > fn entao:
+		--------------------
 		solucao nao exite
-		cn^p para nenhuma escolha de c > 0
+		cn^p para nenhuma escolha de c > 0 e n > 0
 		--------------------
 se nao:
+		se rd_calc > 1 entao:
 
-		rd_calc = 1 - itm_calc // calculo do denominador residual
-		rd_view = pow(rd_calc, -1)
+			rd_calc = 1 - itm_calc // calculo do denominador residual
+
+		se nao
 
 		--------------------
-		= cn^p - ((c/rd_view)n^p - n^fn) <- desejado - residual
+		= cn^p + (rd_calc cn^p + n^fn) <- desejado - residual
 		>= cn^p <- desejado
 
-		Quando (c/rd_view)n^p - n^fn <= 0, por exemplo
+		Quando rd_calc cn^p - n^fn >= 0, por exemplo
 		--------------------
 
 se p < fn entao:
@@ -43,5 +44,6 @@ se p == fn entao:
 		fim-enquanto
 		n <= 1
 
-se nao:
-		solucao nao existe!
+se p > fn entao:
+
+		c <= rd_view e n <= 1			

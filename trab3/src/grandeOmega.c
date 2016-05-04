@@ -1,225 +1,91 @@
 #include "mode.h"
 
-void grandeOmega(typefunction function) {
-
-	float itm_calc, itm_view, rd_calc, rd_view, c;
-
+void print_header(typefunction function) {
 	printf("--------------------------------\n");
 	printf("\nGRANDEOMEGA\n\n");
 
-	itm_calc = 	function.a/pow(function.b, function.p);
-	itm_view = pow(itm_calc, -1);
+	printf("Fato: T(n) = %dT(n/%d) + n^%d\n", function.a, function.b, function.fn);
+	printf("Suposicao: T(n/%d) >= c(n/%d)^%d\nPrecisa provar: T(n) >= cn^%d\n", function.b, function.b, function.p, function.p);
+}
 
-	rd_calc = 1 - itm_calc;
-	rd_view = pow(rd_calc, -1);
+void print_initprove(typefunction function) {
+	printf("\nT(n)\t= %dT(n/%d) + n^%d\n", function.a, function.b, function.fn);
+	printf("\t>= %dc(n/%d)^%d + n^%d\n", function.a, function.b, function.p, function.fn);
+}
 
-	if(function.p < function.fn) {
-		function.res_c = rd_view;
-		function.res_n = 1;		
-	}
-	else if(function.p == function.fn && rd_calc < 0) {
+void print_bodyprove(typefunction function, float rd_calc) {
+	printf("\t= cn^%d + (%.2fcn^%d + n^%d) <- desejado - residual\n", function.p, rd_calc, function.p, function.fn);
+	printf("\t>= cn^%d <- Desejado\n", function.p);
+}
 
-		function.res_c = 1;
-		while(c > 1) {
-			c = function.res_c++/rd_view;			
-		}
-		function.res_n = 1;
-	}
-	else {
-		function.res_c = -1;
-		function.res_n = -1;
-	}
-	
-	if(function.fn == 0) {
-		printf("Fato: T(n) = %dT(n/%d) + 1\n", function.a, function.b);
-
-		if(function.p == 0)  {
-			printf("Suposicao: T(n/%d) >= c\nPrecisa provar: T(n) >= c\n", function.b);
-
-			printf("\nT(n)\t= %dT(n/%d) + 1\n", function.a, function.b);
-			printf("\t>= %dc + 1\n", function.a);		
-
-			printf("\t= (c/%f) + 1\n", itm_view);
-
-
-			// MODE SOLUCTION
-			if(itm_calc < 1) {				
-				printf("\t>= c <- Desejado\n");
-				printf("Solucao nao existe\n");
-			}
-			else {
-				printf("\t= c -((c/%.2f) - 1) <- desejado - residual\n", rd_view);
-				printf("\t>= c <- Desejado\n");
-
-				printf("\t\nQuando (c/%.2f) - 1 <= 0, por exemplo\n", rd_view);
-				printf("\tc <= %d e n <= %d\n", function.res_c, function.res_n);
-			}
-
-		}
-		else if(function.p == 1)  {
-			printf("Suposicao: T(n/%d) >= c(n/%d)\nPrecisa provar: T(n) >= cn\n", function.b, function.b);	
-
-			printf("\nT(n)\t= %dT(n/%d) + 1\n", function.a, function.b);
-			printf("\t>= %dc(n/%d) + 1\n", function.a, function.b);
-
-			printf("\t= (c/%f)n + 1\n", itm_view);
-
-			// MODE SOLUCTION
-			if(itm_calc < 1) {				
-				printf("\t>= cn <- Desejado\n");
-				printf("Solucao nao existe\n");
-			}
-			else {
-				printf("\t= cn -((c/%.2f)n - 1) <- desejado - residual\n", rd_view);
-				printf("\t>= cn <- Desejado\n");
-
-				printf("\t\nQuando (c/%.2f)n - 1 <= 0, por exemplo\n", rd_view);
-				printf("\tc <= %d e n <= %d\n", function.res_c, function.res_n);
-			}
-		}
-		else {
-			printf("Suposicao: T(n/%d) >= c(n/%d)^%d\nPrecisa provar: T(n) >= cn^%d\n", function.b, function.b, function.p, function.p);
-
-			printf("\nT(n)\t= %dT(n/%d) + 1\n", function.a, function.b);
-			printf("\t>= %dc(n/%d)^%d + 1\n", function.a, function.b, function.p);
-
-			printf("\t= (c/%f)n^%d + 1\n", itm_view, function.p);
-
-			// MODE SOLUCTION
-			if(itm_calc < 1) {				
-				printf("\t>= cn^%d <- Desejado\n", function.p);
-				printf("Solucao nao existe\n");
-			}
-			else {
-				printf("\t= cn^%d -((c/%.2f)n^%d - 1) <- desejado - residual\n", function.p, rd_view, function.p);
-				printf("\t>= cn^%d <- Desejado\n", function.p);
-
-				printf("\t\nQuando (c/%.2f)n^%d - 1 <= 0, por exemplo\n", rd_view, function.p);
-				printf("\tc <= %d e n <= %d\n", function.res_c, function.res_n);
-			}
-		}
-	}
-	else if(function.fn == 1){
-		printf("Fato: T(n) = %dT(n/%d) + n\n", function.a, function.b);
-
-		if(function.p == 0)  {
-			printf("Suposicao: T(n/%d) ≤ c\nPrecisa provar: T(n) ≤ c\n", function.b);
-
-			printf("\nT(n)\t= %dT(n/%d) + n\n", function.a, function.b);
-			printf("\t<= %dc + n\n", function.a);
-
-			// MODE SOLUCTION
-			if(itm_calc >= 1 || function.res_c == -1) {				
-				printf("\t<= c <- Desejado\n");
-				printf("Solucao nao existe\n");
-			}
-			else {
-				printf("\t= c -((c/%.2f) - 1) <- desejado - residual\n", rd_view);
-				printf("\t<= c <- Desejado\n");
-
-				printf("\t\nQuando (c/%.2f) - 1 >= 0, por exemplo\n", rd_view);
-				printf("\tc >= %d e n >= %d\n", function.res_c, function.res_n);
-			}
-		}
-		else if(function.p == 1)  {
-			printf("Suposicao: T(n/%d) ≤ c(n/%d)n\nPrecisa provar: T(n) ≤ cn\n", function.b, function.b);	
-
-			printf("\nT(n)\t= %dT(n/%d) + n\n", function.a, function.b);
-			printf("\t<= %dc(n/%d) + n\n", function.a, function.b);
-
-			// MODE SOLUCTION
-			if(itm_calc >= 1) {				
-				printf("\t<= cn <- Desejado\n");
-				printf("Solucao nao existe\n");
-			}
-			else {
-				printf("\t= cn -((c/%.2f)n - n) <- desejado - residual\n", rd_view);
-				printf("\t<= cn <- Desejado\n");
-
-				printf("\t\nQuando (c/%.2f)n - n >= 0, por exemplo\n", rd_view);
-				printf("\tc >= %d e n >= %d\n", function.res_c, function.res_n);
-			}			
-		}
-		else {
-			printf("Suposicao: T(n/%d) ≤ c(n/%d)^%d\nPrecisa provar: T(n) ≤ cn^%d\n", function.b, function.b, function.p, function.p);
-
-			printf("\nT(n)\t= %dT(n/%d) + n\n", function.a, function.b);
-			printf("\t<= %dc(n/%d)^%d + n\n", function.a, function.b, function.p);
-
-			// MODE SOLUCTION
-			if(itm_calc >= 1) {				
-				printf("\t<= cn^%d <- Desejado\n", function.p);
-				printf("Solucao nao existe\n");
-			}
-			else {
-				printf("\t= cn^%d -((c/%.2f)n^%d - n) <- desejado - residual\n", function.p, rd_view, function.p);
-				printf("\t<= cn^%d <- Desejado\n", function.p);
-
-				printf("\t\nQuando (c/%.2f)n^%d - n >= 0, por exemplo\n", rd_view, function.p);
-				printf("\tc >= %d e n >= %d\n", function.res_c, function.res_n);
-			}
-		}	
-	} else {
-		printf("Fato: T(n) = %dT(n/%d) + n^%d\n", function.a, function.b, function.fn);
-
-		if(function.p == 0)  {
-			printf("Suposicao: T(n/%d) ≤ c\nPrecisa provar: T(n) ≤ c\n", function.b);
-
-			printf("\nT(n)\t= %dT(n/%d) + n^%d\n", function.a, function.b, function.fn);
-			printf("\t<= %dc + n^%d\n", function.a, function.fn);
-
-			// MODE SOLUCTION
-			if(itm_calc >= 1) {				
-				printf("\t<= c <- Desejado\n");
-				printf("Solucao nao existe\n");
-			}
-			else {
-				printf("\t= c -((c/%.2f) - n^%d) <- desejado - residual\n", rd_view, function.fn);
-				printf("\t<= c <- Desejado\n");
-
-				printf("\t\nQuando (c/%.2f) - n^%d >= 0, por exemplo\n", rd_view, function.fn);
-				printf("\tc >= %d e n >= %d\n", function.res_c, function.res_n);
-			}
-		}
-		else if(function.p == 1)  {
-			printf("Suposicao: T(n/%d) ≤ c(n/%d)n\nPrecisa provar: T(n) ≤ cn\n", function.b, function.b);	
-
-			printf("\nT(n)\t= %dT(n/%d) + n^%d\n", function.a, function.b, function.fn);
-			printf("\t<= %dc(n/%d) + n^%d\n", function.a, function.b, function.fn);
-
-			// MODE SOLUCTION
-			if(itm_calc >= 1) {				
-				printf("\t<= cn <- Desejado\n");
-				printf("Solucao nao existe\n");
-			}
-			else {
-				printf("\t= cn -((c/%.2f)n - n^%d) <- desejado - residual\n", rd_view, function.fn);
-				printf("\t<= cn <- Desejado\n");
-
-				printf("\t\nQuando (c/%.2f)n - n^%d >= 0, por exemplo\n", rd_view, function.fn);
-				printf("\tc >= %d e n >= %d\n", function.res_c, function.res_n);
-			}
-		}
-		else {
-			printf("Suposicao: T(n/%d) ≤ c(n/%d)^%d\nPrecisa provar: T(n) ≤ cn^%d\n", function.b, function.b, function.p, function.p);
-
-			printf("\nT(n)\t= %dT(n/%d) + n^%d\n", function.a, function.b, function.fn);
-			printf("\t<= %dc(n/%d)^%d + n^%d\n", function.a, function.b, function.p, function.fn);
-
-			// MODE SOLUCTION
-			if(itm_calc >= 1 || function.res_c == -1) {				
-				printf("\t<= cn^%d <- Desejado\n", function.p);
-				printf("Solucao nao existe\n");
-			}
-			else {
-				printf("\t= cn^%d -((c/%.2f)n^%d - n^%d) <- desejado - residual\n", function.p, rd_view, function.p, function.fn);
-				printf("\t<= cn^%d <- Desejado\n", function.p);
-
-				printf("\t\nQuando (c/%.2f)n^%d - n^%d >= 0, por exemplo\n", rd_view, function.p, function.fn);
-				printf("\tc >= %d e n >= %d\n", function.res_c, function.res_n);
-			}
-		}
-	}
+void print_result(typefunction function, float rd_calc) {
+	printf("\t\nQuando %.2fcn^%d + n^%d >= 0, por exemplo\n", rd_calc, function.p, function.fn);
+	printf("\tc >= %.2f e n >= %d\n", function.res_comega, function.res_nomega);
 
 	printf("\n--------------------------------\n");
+}
+
+void print_anyresult(typefunction function) {
+	printf("\t\nQuando n^%d >= 0, por exemplo\n", function.fn);
+	printf("\tn >= %d\n", function.res_nomega);
+
+	printf("\n--------------------------------\n");
+}
+
+void print_notexists(typefunction function) {
+	printf("\t\n>= cn^%d para qualquer escolha de c > 0\n", function.p);
+	printf("\tNao foi possivel completar a prova\n");
+
+	printf("\n--------------------------------\n");
+}
+
+void grandeOmega(typefunction function) {
+
+	float itm_calc, rd_calc;
+
+	itm_calc = 	function.a/pow(function.b, function.p);	
+	rd_calc = itm_calc - 1;
+
+	print_header(function);
+	print_initprove(function);
+	print_bodyprove(function, rd_calc);
+
+	if(itm_calc < 1) {
+
+		if(function.p > function.fn) {
+			print_notexists(function);
+
+			function.res_comega = -1;
+			function.res_nomega = -1;
+		}
+		else if(function.p == 0 && function.fn == 0) {
+			function.res_comega = 1;
+			function.res_nomega = 1;
+			print_result(function, rd_calc);
+		}
+		else if(function.p == function.fn) {
+			print_notexists(function);	
+
+			function.res_comega = -1;
+			function.res_nomega = -1;
+		}
+		else {			
+			function.res_comega = 1/rd_calc;
+			function.res_nomega = 1;
+			print_result(function, rd_calc);			
+		}
+	}
+	else if (itm_calc == 1) {
+		function.res_comega = 0; // any value
+		function.res_nomega = 1;
+		print_anyresult(function);
+	}
+	else {
+		function.res_comega = 1;
+		function.res_nomega = 1;
+		print_result(function, rd_calc);
+	}
+
+	comega = function.res_comega;
+	nomega = function.res_nomega;
 }

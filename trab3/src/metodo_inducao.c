@@ -1,5 +1,8 @@
 #include "mode.h"
 
+float comega = -2, co = -2;
+int nomega = -2, no = -2;
+
 int valid_function(typefunction function) {
 	int flag = 0;
 	if(function.a <= 0) {
@@ -27,8 +30,9 @@ void cases(typefunction function) {
 		grandeOmega(function);		
 	}
 	else if (strcmp(function.mode, "teta") == 0){
-		// prove_teta();	
-		printf("\n\nGRANDE O\n\n");
+		grandeO(function);	
+		grandeOmega(function);
+		teta(function);
 	}
 }
 
@@ -37,7 +41,7 @@ int main(int argc, char *argv[]){
 	typefunction function;
 
 	if(argc < 5) {
-		perror("Usage: <program object> <a> <b> <fn> <p>");
+		perror("Usage: <program object> <a> <b> <fn> <p> <mode>");
 		return 0;
 	}
 	

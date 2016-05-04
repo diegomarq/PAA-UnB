@@ -2,8 +2,11 @@ SRC = ./src/
 
 all:  metodo_inducao clean
 
-metodo_inducao: grandeO.o grandeOmega.o
-	gcc -Wall $(SRC)metodo_inducao.c $(SRC)mode.h grandeO.o grandeOmega.o -o metodo_inducao.out -lm
+metodo_inducao: grandeOmega.o grandeO.o teta.o
+	gcc -Wall $(SRC)metodo_inducao.c $(SRC)mode.h grandeOmega.o grandeO.o teta.o -o metodo_inducao.out -lm
+
+teta.o:
+	gcc -Wall $(SRC)teta.c $(SRC)mode.h -c -lm
 
 grandeOmega.o:
 	gcc -Wall $(SRC)grandeOmega.c $(SRC)mode.h -c -lm

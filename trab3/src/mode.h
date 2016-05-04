@@ -12,11 +12,19 @@ typedef struct _typefunction {
 	int p;
 	char mode[6];
 
-	int res_c;
-	int res_n;
+	float res_comega;
+	float res_co;
+	float res_cteta;
+	int res_nomega;
+	int res_no;
+	int res_nteta;
 }typefunction;
+
+extern float comega, co;
+extern int nomega, no;
 
 void grandeO(typefunction function);
 void grandeOmega(typefunction function);
+void teta(typefunction function);
 
 #endif
