@@ -7,6 +7,6 @@ Diego Marques de Azevedo 11/0027876
 Implementacao do trabalho 3 - PAA
 
 Compilar:	make
-Executar:	./metodo_inducao.out <a> <b> <fn> <p> <mode>
+Executar:	./inducao.out <a> <b> <fn> <p> <mode>
 	
 <mode>: pode ser grandeo, grandeomega ou teta

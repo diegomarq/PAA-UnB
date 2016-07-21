@@ -1,4 +1,4 @@
-#include "mode.h"
+#include "mode_11_0027876_Diego.h"
 
 void _tprint_result(typefunction function) {	
 	printf("\t\nO valor entao sera:\n");

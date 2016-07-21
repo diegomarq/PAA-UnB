@@ -1,4 +1,4 @@
-#include "mode.h"
+#include "mode_11_0027876_Diego.h"
 
 float comega = -2, co = -2;
 int nomega = -2, no = -2;

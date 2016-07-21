@@ -1,4 +1,4 @@
-#include "mode.h"
+#include "mode_11_0027876_Diego.h"
 
 void _print_header(typefunction function) {
 	printf("--------------------------------\n");
